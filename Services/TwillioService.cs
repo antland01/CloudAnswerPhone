@@ -28,7 +28,16 @@ namespace SimpleAnswerPhone
 
         public string SendWhatsAppMessage(string messageText, string to) => SendMessage(messageText, "whatsapp:" + to, "whatsapp:" + Environment.GetEnvironmentVariable("MyNotificationNumber", EnvironmentVariableTarget.Process));
 
-        private string SendMessage(string messageText, string to, string from) => MessageResource.Create(body: messageText, from: new Twilio.Types.PhoneNumber(from), to: new Twilio.Types.PhoneNumber(to), statusCallback: new Uri(Environment.GetEnvironmentVariable("FunctionURL", EnvironmentVariableTarget.Process) + "/api/APErrorCalback", UriKind.Absolute)).Sid;
-
+        private string SendMessage(string messageText, string to, string from)
+        {
+            try
+            {
+                return MessageResource.Create(body: messageText, from: new Twilio.Types.PhoneNumber(from), to: new Twilio.Types.PhoneNumber(to), statusCallback: new Uri(Environment.GetEnvironmentVariable("FunctionURL", EnvironmentVariableTarget.Process) + "/api/APErrorCalback" + Environment.GetEnvironmentVariable("ErrorCallBackAzureFunctionKey", EnvironmentVariableTarget.Process), UriKind.Absolute)).Sid;
+            }
+            catch(Exception e)
+            {
+                return null;
+            }
+        }
     }
 }
