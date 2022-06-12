@@ -10,6 +10,7 @@ namespace SimpleAnswerPhone
     {
 
         TwiMLResult ReplyWithMessageToCall(string message, string voice);
+        TwiMLResult ReplyWithMessageToSms(string message);
         public string SendSMS(string messageText, string to);
         public string SendWhatsAppMessage(string messageText, string to);
     }
@@ -23,6 +24,9 @@ namespace SimpleAnswerPhone
         }
 
         public TwiMLResult ReplyWithMessageToCall(string message, string voice) => TwiML(new VoiceResponse().Say(message, voice: voice));
+
+        public TwiMLResult ReplyWithMessageToSms(string message) => TwiML(new MessagingResponse().Message(message));
+
 
         public string SendSMS(string messageText, string to) => SendMessage(messageText, to, Environment.GetEnvironmentVariable("MyNotificationNumber", EnvironmentVariableTarget.Process));
 
