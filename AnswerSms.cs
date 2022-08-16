@@ -25,7 +25,7 @@ namespace SimpleAnswerPhone
         {
             log.LogInformation("New Sms received");
 
-             _TwillioService.SendSMS("Your UK Number received a Call from " + req.Form["From"], Environment.GetEnvironmentVariable("MyNumber", EnvironmentVariableTarget.Process));
+             _TwillioService.SendSMS("Your UK Number received a SMS from " + req.Form["From"], Environment.GetEnvironmentVariable("MyNumber", EnvironmentVariableTarget.Process));
 
             return _TwillioService.ReplyWithMessageToSms("Thank you for your SMS message. Due to the current on going Covid-19 situation. As of June 9th 2020, I no longer reside in the United Kingdom. Please email me if you wish to contact me. Thank you and stay safe.");
 
