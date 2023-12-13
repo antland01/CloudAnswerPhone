@@ -14,7 +14,7 @@ variables:
   functionAppName: 'SimpleAnswerPhone20210718181416'
 
   # Agent VM image name
-  vmImageName: 'windows-2019'
+  vmImageName: 'windows-2022'
 
   # Working Directory
   workingDirectory: 'CloudAnswerPhone'
