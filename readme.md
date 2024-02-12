@@ -7,6 +7,8 @@ Simple Azure function for use as an Answerphone.
 This project was started as a wat to answer my UK cellphone number whilst living in Australia. I had moved the
 number onto Twilio so I decided to build an Azure function that would have a request sent to it everytime my number would be called.
 
+![Deploy to Azure](https://aka.ms/deploytoazurebutton)
+
 
 ## Getting Started
 
