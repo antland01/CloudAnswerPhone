@@ -1,187 +1,186 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "metadata": {
-    "_generator": {
-      "name": "bicep",
-      "version": "0.15.31.15270",
-      "templateHash": "11861629922040246994"
-    }
-  },
-  "parameters": {
-    "appName": {
-      "type": "string",
-      "defaultValue": "[format('fnapp{0}', uniqueString(resourceGroup().id))]",
-      "metadata": {
-        "description": "The name of the function app that you wish to create."
-      }
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "metadata": {
+        "_generator": {
+            "name": "bicep",
+            "version": "0.15.31.15270",
+            "templateHash": "11861629922040246994"
+        }
     },
-    "storageAccountType": {
-      "type": "string",
-      "defaultValue": "Standard_LRS",
-      "allowedValues": [
-        "Standard_LRS",
-        "Standard_GRS",
-        "Standard_RAGRS"
-      ],
-      "metadata": {
-        "description": "Storage Account type"
-      }
-    },
-    "location": {
-      "type": "string",
-      "defaultValue": "[resourceGroup().location]",
-      "metadata": {
-        "description": "Location for all resources."
-      }
-    },
-    "appInsightsLocation": {
-      "type": "string",
-      "metadata": {
-        "description": "Location for Application Insights"
-      }
-    },
-    "runtime": {
-      "type": "string",
-      "defaultValue": "dotnet",
-      "metadata": {
-        "description": "The language worker runtime to load in the function app."
-      }
-    }
-  },
-  "variables": {
-    "functionAppName": "[parameters('appName')]",
-    "hostingPlanName": "[parameters('appName')]",
-    "applicationInsightsName": "[parameters('appName')]",
-    "storageAccountName": "[format('{0}azfunctions', uniqueString(resourceGroup().id))]",
-    "functionWorkerRuntime": "[parameters('runtime')]"
-  },
-  "resources": [
-    {
-      "type": "Microsoft.Storage/storageAccounts",
-      "apiVersion": "2022-05-01",
-      "name": "[variables('storageAccountName')]",
-      "location": "[parameters('location')]",
-      "sku": {
-        "name": "[parameters('storageAccountType')]"
-      },
-      "kind": "Storage",
-      "properties": {
-        "supportsHttpsTrafficOnly": true,
-        "defaultToOAuthAuthentication": true
-      }
-    },
-    {
-      "type": "Microsoft.Web/serverfarms",
-      "apiVersion": "2021-03-01",
-      "name": "[variables('hostingPlanName')]",
-      "location": "[parameters('location')]",
-      "sku": {
-        "name": "Y1",
-        "tier": "Dynamic"
-      },
-      "properties": {}
-    },
-    {
-      "type": "Microsoft.Web/sites",
-      "apiVersion": "2021-03-01",
-      "name": "[variables('functionAppName')]",
-      "location": "[parameters('location')]",
-      "kind": "functionapp",
-      "identity": {
-        "type": "SystemAssigned"
-      },
-      "properties": {
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
-        "siteConfig": {
-          "appSettings": [
-
-            {
-    "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
-    "value": "",
-  },
-  {
-    "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
-    "value": "",
-  },
-  {
-    "name": "AzureWebJobsDashboard",
-    "value": "",
-  },
-  {
-    "name": "AzureWebJobsStorage",
-    "value": "",
-  },
-  {
-    "name": "ConnectionStrings__AzureWebJobsStorage",
-    "value": "",
-  },
-  {
-    "name": "ErrorCallBackAzureFunctionKey",
-    "value": "",
-  },
-  {
-    "name": "FUNCTIONS_EXTENSION_VERSION",
-    "value": "~4",
-  },
-  {
-    "name": "FUNCTIONS_WORKER_RUNTIME",
-    "value": "dotnet-isolated",
-  },
-  {
-    "name": "FunctionURL",
-    "value": "",
-  },
-  {
-    "name": "MyNotificationNumber",
-    "value": "",
-  },
-  {
-    "name": "MyNumber",
-    "value": "",
-  },
-  {
-    "name": "TwilioAuth",
-    "value": "",
-  },
-  {
-    "name": "TwilioSID",
-    "value": "",
-  },
-  {
-    "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
-    "value": "",
-  },
-  {
-    "name": "WEBSITE_CONTENTSHARE",
-    "value": "",
-  },
-  {
-    "name": "WEBSITE_RUN_FROM_PACKAGE",
-    "value": "1",
-  }
-          ],
-          "ftpsState": "FtpsOnly",
-          "minTlsVersion": "1.2"
+    "parameters": {
+        "appName": {
+            "type": "string",
+            "defaultValue": "[format('fnapp{0}', uniqueString(resourceGroup().id))]",
+            "metadata": {
+                "description": "The name of the function app that you wish to create."
+            }
         },
-        "httpsOnly": true
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Insights/components', variables('applicationInsightsName'))]",
-        "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
-        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
-      ]
+        "storageAccountType": {
+            "type": "string",
+            "defaultValue": "Standard_LRS",
+            "allowedValues": [
+                "Standard_LRS",
+                "Standard_GRS",
+                "Standard_RAGRS"
+            ],
+            "metadata": {
+                "description": "Storage Account type"
+            }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Location for all resources."
+            }
+        },
+        "appInsightsLocation": {
+            "type": "string",
+            "metadata": {
+                "description": "Location for Application Insights"
+            }
+        },
+        "runtime": {
+            "type": "string",
+            "defaultValue": "dotnet",
+            "metadata": {
+                "description": "The language worker runtime to load in the function app."
+            }
+        }
     },
-    {
-      "type": "Microsoft.Insights/components",
-      "apiVersion": "2020-02-02",
-      "name": "[variables('applicationInsightsName')]",
-      "location": "[parameters('appInsightsLocation')]",
-      "kind": "web",
-      "properties": {
-        "Application_Type": "web",
-        "Request_Source": "rest"
-      }
-    }
-  ]
+    "variables": {
+        "functionAppName": "[parameters('appName')]",
+        "hostingPlanName": "[parameters('appName')]",
+        "applicationInsightsName": "[parameters('appName')]",
+        "storageAccountName": "[format('{0}azfunctions', uniqueString(resourceGroup().id))]",
+        "functionWorkerRuntime": "[parameters('runtime')]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2022-05-01",
+            "name": "[variables('storageAccountName')]",
+            "location": "[parameters('location')]",
+            "sku": {
+                "name": "[parameters('storageAccountType')]"
+            },
+            "kind": "Storage",
+            "properties": {
+                "supportsHttpsTrafficOnly": true,
+                "defaultToOAuthAuthentication": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/serverfarms",
+            "apiVersion": "2021-03-01",
+            "name": "[variables('hostingPlanName')]",
+            "location": "[parameters('location')]",
+            "sku": {
+                "name": "Y1",
+                "tier": "Dynamic"
+            },
+            "properties": {}
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2021-03-01",
+            "name": "[variables('functionAppName')]",
+            "location": "[parameters('location')]",
+            "kind": "functionapp",
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "properties": {
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
+                "siteConfig": {
+                    "appSettings": [
+                        {
+                            "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+                            "value": ""
+                        },
+                        {
+                            "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
+                            "value": ""
+                        },
+                        {
+                            "name": "AzureWebJobsDashboard",
+                            "value": ""
+                        },
+                        {
+                            "name": "AzureWebJobsStorage",
+                            "value": ""
+                        },
+                        {
+                            "name": "ConnectionStrings__AzureWebJobsStorage",
+                            "value": ""
+                        },
+                        {
+                            "name": "ErrorCallBackAzureFunctionKey",
+                            "value": ""
+                        },
+                        {
+                            "name": "FUNCTIONS_EXTENSION_VERSION",
+                            "value": "~4"
+                        },
+                        {
+                            "name": "FUNCTIONS_WORKER_RUNTIME",
+                            "value": "dotnet-isolated"
+                        },
+                        {
+                            "name": "FunctionURL",
+                            "value": ""
+                        },
+                        {
+                            "name": "MyNotificationNumber",
+                            "value": ""
+                        },
+                        {
+                            "name": "MyNumber",
+                            "value": ""
+                        },
+                        {
+                            "name": "TwilioAuth",
+                            "value": ""
+                        },
+                        {
+                            "name": "TwilioSID",
+                            "value": ""
+                        },
+                        {
+                            "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+                            "value": ""
+                        },
+                        {
+                            "name": "WEBSITE_CONTENTSHARE",
+                            "value": ""
+                        },
+                        {
+                            "name": "WEBSITE_RUN_FROM_PACKAGE",
+                            "value": "1"
+                        }
+                    ],
+                    "ftpsState": "FtpsOnly",
+                    "minTlsVersion": "1.2"
+                },
+                "httpsOnly": true
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Insights/components', variables('applicationInsightsName'))]",
+                "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
+            ]
+        },
+        {
+            "type": "Microsoft.Insights/components",
+            "apiVersion": "2020-02-02",
+            "name": "[variables('applicationInsightsName')]",
+            "location": "[parameters('appInsightsLocation')]",
+            "kind": "web",
+            "properties": {
+                "Application_Type": "web",
+                "Request_Source": "rest"
+            }
+        }
+    ]
 }
