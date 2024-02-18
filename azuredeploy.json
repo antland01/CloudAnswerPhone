@@ -150,7 +150,12 @@
                         {
                             "name": "WEBSITE_RUN_FROM_PACKAGE",
                             "value": "1"
-                        }
+                        },
+                        {
+                            "name": "WEBSITE_CONTENTSHARE",
+                            "value": "[toLower(variables('functionAppName'))]"
+                            "slotSetting": false
+                       }
                     ],
                     "ftpsState": "FtpsOnly",
                     "minTlsVersion": "1.2"
