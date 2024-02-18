@@ -153,7 +153,7 @@
                         },
                         {
                             "name": "WEBSITE_CONTENTSHARE",
-                            "value": ""
+                            "value": "[toLower(variables('functionAppName'))]"
                        },
                         {
                             "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
