@@ -47,6 +47,30 @@
             "metadata": {
                 "description": "The language worker runtime to load in the function app."
             }
+        },
+        "MyNumber": {
+            "type": "string",
+            "metadata": {
+                "description": "The Twilio number in which the Function is monitoring."
+            }
+        },
+        "MyNotificationNumber": {
+            "type": "string",
+            "metadata": {
+                "description": "The number that is going to send you a notification when you get a call."
+            }
+        },
+        "TwilioAuth": {
+            "type": "string",
+            "metadata": {
+                "description": "The Auth value provided by Twilio"
+            }
+        },
+        "TwilioSID": {
+            "type": "string",
+            "metadata": {
+                "description": "The Twilio SID for the Twilio Account running the phone number"
+            }
         }
     },
     "variables": {
@@ -133,19 +157,19 @@
                         },
                         {
                             "name": "MyNotificationNumber",
-                            "value": ""
+                            "value": "[parameters('MyNotificationNumber')]"
                         },
                         {
                             "name": "MyNumber",
-                            "value": ""
+                            "value": "[parameters('MyNumber')]"
                         },
                         {
                             "name": "TwilioAuth",
-                            "value": ""
+                            "value": "[parameters('TwilioAuth')]"
                         },
                         {
                             "name": "TwilioSID",
-                            "value": ""
+                            "value": "[parameters('TwilioSID')]"
                         },
                         {
                             "name": "WEBSITE_RUN_FROM_PACKAGE",
