@@ -118,7 +118,7 @@
                         },
                         {
                             "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
-                            "value": ""
+                            "value": "[reference(resourceId('Microsoft.Insights/components', variables('applicationInsightsName')), '2020-02-02').ConnectionString]"
                         },
                         {
                             "name": "AzureWebJobsDashboard",
