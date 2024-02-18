@@ -154,6 +154,10 @@
                         {
                             "name": "WEBSITE_CONTENTSHARE",
                             "value": ""
+                       },
+                        {
+                            "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+                            "value": "[format('DefaultEndpointsProtocol=https;AccountName={0};EndpointSuffix={1};AccountKey={2}', test, environment().suffixes.storage, test)]"
                        }
                     ],
                     "ftpsState": "FtpsOnly",
