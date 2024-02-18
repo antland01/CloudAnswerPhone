@@ -151,6 +151,10 @@
                             "name": "WEBSITE_RUN_FROM_PACKAGE",
                             "value": "1"
                         },
+                          {
+                            "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+                            "value": "",
+                          },
                         {
                             "name": "WEBSITE_CONTENTSHARE",
                             "value": ""
