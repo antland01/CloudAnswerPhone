@@ -41,13 +41,6 @@
                 "description": "Location for Application Insights"
             }
         },
-        "runtime": {
-            "type": "string",
-            "defaultValue": "dotnet",
-            "metadata": {
-                "description": "The language worker runtime to load in the function app."
-            }
-        },
         "MyNumber": {
             "type": "string",
             "metadata": {
@@ -78,7 +71,7 @@
         "hostingPlanName": "[parameters('appName')]",
         "applicationInsightsName": "[parameters('appName')]",
         "storageAccountName": "[format('{0}azfunctions', uniqueString(resourceGroup().id))]",
-        "functionWorkerRuntime": "[parameters('runtime')]"
+        "functionWorkerRuntime": "dotnet-isolated"
     },
     "resources": [
         {
@@ -149,11 +142,11 @@
                         },
                         {
                             "name": "FUNCTIONS_WORKER_RUNTIME",
-                            "value": "dotnet-isolated"
+                            "value": "[variables('functionWorkerRuntime')]"
                         },
                         {
                             "name": "FunctionURL",
-                            "value": "[format('DefaultEndpointsProtocol=https;AccountName={0}', variables('functionAppName'))]"
+                            "value": "[format('https://{0}.azurewebsites.net/', variables('functionAppName'))]"
                         },
                         {
                             "name": "MyNotificationNumber",
