@@ -129,10 +129,6 @@
                             "value": "[format('DefaultEndpointsProtocol=https;AccountName={0};AccountKey={2};EndpointSuffix={1}', variables('storageAccountName'), environment().suffixes.storage, listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2022-05-01').keys[0].value)]"
                         },
                         {
-                            "name": "ConnectionStrings__AzureWebJobsStorage",
-                            "value": ""
-                        },
-                        {
                             "name": "ErrorCallBackAzureFunctionKey",
                             "value": ""
                         },
@@ -188,6 +184,38 @@
                 "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
             ]
         },
+        {
+      "type": "Microsoft.Web/sites/functions",
+      "apiVersion": "2020-12-01",
+      "name": "AnswerPhone",
+      "properties": {
+        "config": {
+          "disabled": false,
+          "bindings": [
+            {
+              "name": "req",
+              "type": "httpTrigger",
+              "direction": "in",
+              "authLevel": "function",
+              "methods": [
+                "get"
+              ]
+            },
+            {
+              "name": "$return",
+              "type": "http",
+              "direction": "out"
+            }
+          ]
+        },
+        "files": {
+          "run.csx"
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', variables('functionAppName'))]"
+      ]
+    },
         {
             "type": "Microsoft.Insights/components",
             "apiVersion": "2020-02-02",
