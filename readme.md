@@ -1,53 +1,81 @@
 # Cloud Answerphone
 
-Simple Azure function for use as an Answerphone.
+## Overview
 
-## Description
-
-This project was started as a wat to answer my UK cellphone number whilst living in Australia. I had moved the
+This project was started as a Web Service to answer my UK cellphone number whilst living in Australia. I had moved the
 number onto Twilio so I decided to build an Azure function that would have a request sent to it everytime my number would be called.
-
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fantland01%2FCloudAnswerPhone%2Fmaster%2Fazuredeploy.json)
-
-
-
-## Getting Started
 
 ### Dependencies
 
-* A Twilio Account
-* Azure Subscription
-* .Net Core
+- .NET 8 SDK installed ([Download .NET SDK](https://dotnet.microsoft.com/download))
+- Ngrok Installed (For local builds) ([Download NGROK](https://ngrok.com/download)) 
+- Azure subscription ([Create Azure account](https://azure.microsoft.com/en-us/free/))
+- Twilio subscription ([Create Twilio account](https://login.twilio.com/u/signup))
 
-### Installing
+## Setup
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/antland01/CloudAnswerPhone
+   
+2. **Navigate to the project directory:**
+   ```bash
+   cd CloudAnswerPhone
+   ```
+3. **Restore dependencies:**
+   ```bash
+   dotnet restore
+   ```
+   
+## Configuration
 
-### Executing program
+1. **Azure Resources Setup:**
+- Create an Azure Function App in the Azure portal.
+- Obtain the connection string or other required credentials for your Azure resources (e.g., Azure Storage, Azure Cosmos DB, etc.).
+  
+2. **Twilio Setup:**
+- Coming soon
 
-* How to run the program
-* Step-by-step bullets
-```
-code blocks for commands
-```
+3. **Local Configuration:**
+- Create a local.settings.json file in the project root.
+- fill in with the below template.
+   ```json
+   {
+    "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": [Connection String from Azure for the Azure Function],
+    "FUNCTIONS_EXTENSION_VERSION": "~4",
+    "TwilioAuth": [Auth Token from Your Twilio Account],
+    "TwilioSID": [SID from Your Twilio Account],
+    "MyNumber": [Number you want the Text messages to go to when you get a call],
+    "MyNotificationNumber": [Twilio Number for sending notifications from],
+    "FunctionURL": [The URL of the Function, Either get this from Azure or NGROK],
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated"
 
-## Authors
+  }
+   }
+   ```
+
+## Running Locally
+
+To run the Azure Function locally, follow these steps:
+   ```bash
+   dotnet build
+   func start
+   ```
+
+## Deployment
+To deploy the Azure Function to Azure, you can use various methods including:
+
+- Azure DevOps Pipelines
+- GitHub Actions
+- Visual Studio Publish
+- Azure CLI
+- Azure Portal
+  
+Choose the deployment method that best fits your workflow and follow the appropriate steps for deployment.
+
+## Author
 
 [Anthony Smith](https://www.linkedin.com/in/antland/)
 
-## Version History
-
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
-* 0.1
-    * Initial Release
-
-## License
-
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
-
-## Acknowledgments
-
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
