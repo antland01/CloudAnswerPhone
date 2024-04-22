@@ -17,7 +17,7 @@ number onto Twilio so I decided to build an Azure function that would have a req
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/antland01/CloudAnswerPhone
-   
+   ```
 2. **Navigate to the project directory:**
    ```bash
    cd CloudAnswerPhone
@@ -26,15 +26,22 @@ number onto Twilio so I decided to build an Azure function that would have a req
    ```bash
    dotnet restore
    ```
+4. **Set up Azure Function CLI (Azure Functions Core Tools):**
+   ```bash
+   npm i -g azure-functions-core-tools --unsafe-perm true
+   ```
+   
    
 ## Configuration
 
 1. **Azure Resources Setup:**
 - Create an Azure Function App in the Azure portal.
-- Obtain the connection string or other required credentials for your Azure resources (e.g., Azure Storage, Azure Cosmos DB, etc.).
+- Obtain the connection string and URL for your Azure Function
   
 2. **Twilio Setup:**
-- Coming soon
+- Sign up for Twilio if you haven't already - ([Create Twilio account](https://login.twilio.com/u/signup))
+- Also setup the numbers you will use with the service to use it to its full you will need at least 2 numbers one to send the notifications and one to call to.
+- Go to the Account Info on the main page and note down the Account SID and the Auth Token as they will both be used for the Function.
 
 3. **Local Configuration:**
 - Create a local.settings.json file in the project root.
@@ -58,11 +65,17 @@ number onto Twilio so I decided to build an Azure function that would have a req
 
 ## Running Locally
 
-To run the Azure Function locally, follow these steps:
+1. Run the Azure function locally. Note down the port number being used for the function AnswerPhone. 
    ```bash
    dotnet build
    func start
    ```
+2. Run NGROK with the port number used, Default is 7071. 
+   ```bash
+   ngrok.exe http 7071
+   ```
+3. Go to Twilio and navigate to thw phone number you wish to use and set the webhook URL to NGROKURL/api/AnswerPhone     
+   
 
 ## Deployment
 To deploy the Azure Function to Azure, you can use various methods including:
